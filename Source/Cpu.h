@@ -19,7 +19,6 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "EventHandler.h"
 #include "DisplayController.h"
 #include "SoundController.h"
 #include "Memory.h"

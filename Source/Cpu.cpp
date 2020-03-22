@@ -19,6 +19,7 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "error.h"
 #include "Cpu.h"
+#include "EventHandler.h"
 
 Cpu::Cpu(Memory& memory) : m_memory(memory), m_displayController(memory, *this), m_soundController(memory)
 {
