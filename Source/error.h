@@ -1,5 +1,5 @@
 /*
-Copyright 2017-2019 Wilfried Rabouin
+Copyright 2017-2020 Wilfried Rabouin
 
 This file is part of CppGB.
 
