@@ -49,7 +49,16 @@ void EventHandler::updateP1(u8& P1)
 
 bool EventHandler::isQuitRequested()
 {
+	return m_quitRequested;
+}
+
+void EventHandler::pollEvents()
+{
 	SDL_Event event;
-	SDL_PollEvent(&event);
-	return event.type == SDL_QUIT;
+
+	while (SDL_PollEvent(&event))
+	{
+		if (event.type == SDL_QUIT)
+			m_quitRequested = true;
+	}
 }

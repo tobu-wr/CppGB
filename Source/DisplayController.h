@@ -35,7 +35,6 @@ public:
 
 	void doCycle();
 	void writeToLCDC(u8 value);
-	void regulateFps();
 
 	u8 readBgPaletteColor();
 	u8 readObjPaletteColor();

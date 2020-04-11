@@ -18,8 +18,6 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <list>
-#include <chrono>
-#include <thread>
 
 #include <SDL.h>
 
@@ -31,7 +29,7 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 constexpr u8 CHARACTER_DATA_SIZE = 16;
 constexpr u8 CHARACTER_WIDTH = 8;
 constexpr u8 CHARACTERS_PER_LINE = 32;
-constexpr u8 SCREEN_SCALE = 4;
+constexpr u8 SCREEN_SCALE = 2;
 
 DisplayController::DisplayController(Memory& memory, Cpu& cpu) : m_memory(memory), m_cpu(cpu)
 {
@@ -122,32 +120,6 @@ void DisplayController::writeToLCDC(u8 value)
 	{
 		m_memory.LY = 0;
 		changeMode(HBLANK_MODE_FLAG);
-	}
-}
-
-void DisplayController::regulateFps()
-{
-	constexpr u16 CYCLES_PER_FRAME = 17556;
-	constexpr auto TIME_PER_FRAME = std::chrono::nanoseconds(16'742'706);
-
-	static u16 cycleCounter = 0;
-	++cycleCounter;
-
-	if (cycleCounter == CYCLES_PER_FRAME)
-	{
-		cycleCounter = 0;
-
-		static auto lastFrameTime = std::chrono::steady_clock::now();
-		auto currentTime = std::chrono::steady_clock::now();
-		auto elapsedTime = currentTime - lastFrameTime;
-
-		if (elapsedTime < TIME_PER_FRAME)
-		{
-			std::this_thread::sleep_for(TIME_PER_FRAME - elapsedTime);
-			lastFrameTime += TIME_PER_FRAME;
-		}
-		else
-			lastFrameTime = currentTime;
 	}
 }
 

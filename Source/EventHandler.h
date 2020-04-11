@@ -21,8 +21,14 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "types.h"
 
-namespace EventHandler
+class EventHandler
 {
-	void updateP1(u8& P1);
+public:
+	static void updateP1(u8& P1);
+	
+	void pollEvents();
 	bool isQuitRequested();
+
+private:
+	bool m_quitRequested = false;
 };

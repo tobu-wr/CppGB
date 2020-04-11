@@ -17,9 +17,11 @@ You should have received a copy of the GNU General Public License
 along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <chrono>
+#include <thread>
+
 #include "error.h"
 #include "Cpu.h"
-#include "EventHandler.h"
 
 Cpu::Cpu(Memory& memory) : m_memory(memory), m_displayController(memory, *this), m_soundController(memory)
 {
@@ -30,7 +32,7 @@ Cpu::Cpu(Memory& memory) : m_memory(memory), m_displayController(memory, *this),
 
 void Cpu::run()
 {
-	while (!EventHandler::isQuitRequested())
+	while (!m_eventHandler.isQuitRequested())
 	{
 		EventHandler::updateP1(m_memory.P1);
 		handleInterrupts();
@@ -2818,7 +2820,33 @@ void Cpu::doCycle(u8 cycleCount)
 		}
 
 		m_displayController.doCycle();
-		m_displayController.regulateFps();
+
+		constexpr u16 CYCLES_PER_FRAME = 17'556;
+		
+		static u16 cycleCounter = 0;
+		++cycleCounter;
+
+		if (cycleCounter == CYCLES_PER_FRAME)
+		{
+			cycleCounter = 0;
+
+			m_eventHandler.pollEvents();
+
+			// regulate framerate
+			constexpr auto TIME_PER_FRAME = std::chrono::nanoseconds(16'742'706);
+
+			static auto lastFrameTime = std::chrono::steady_clock::now();
+			auto currentTime = std::chrono::steady_clock::now();
+			auto elapsedTime = currentTime - lastFrameTime;
+
+			if (elapsedTime < TIME_PER_FRAME)
+			{
+				std::this_thread::sleep_for(TIME_PER_FRAME - elapsedTime);
+				lastFrameTime += TIME_PER_FRAME;
+			}
+			else
+				lastFrameTime = currentTime;
+		}
 	}
 }
 

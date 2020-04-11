@@ -19,6 +19,7 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+#include "EventHandler.h"
 #include "DisplayController.h"
 #include "SoundController.h"
 #include "Memory.h"
@@ -36,6 +37,7 @@ public:
 	};
 
 	Cpu(Memory& memory);
+
 	void run();
 	void requestInterrupt(InterruptFlag flag);
 	bool isCgbMode();
@@ -104,6 +106,7 @@ private:
 #pragma warning(pop)
 
 	Memory& m_memory;
+	EventHandler m_eventHandler;
 	DisplayController m_displayController;
 	SoundController m_soundController;
 
