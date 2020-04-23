@@ -19,7 +19,7 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "Memory.h"
 #include "Cpu.h"
-#include "error.h"
+#include "Error.h"
 
 int main(int argumentCount, char* arguments[])
 {

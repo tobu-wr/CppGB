@@ -19,7 +19,7 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <SDL.h>
 
-#include "error.h"
+#include "Error.h"
 #include "Memory.h"
 #include "SoundController.h"
 

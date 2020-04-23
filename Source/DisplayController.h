@@ -21,7 +21,7 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <array>
 
-#include "types.h"
+#include "Types.h"
 
 class Memory;
 class Cpu;

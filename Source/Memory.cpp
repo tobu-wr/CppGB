@@ -22,7 +22,7 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 #include <algorithm>
 #include <iterator>
 
-#include "error.h"
+#include "Error.h"
 #include "Memory.h"
 
 enum : u16

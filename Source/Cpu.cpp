@@ -20,7 +20,7 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 #include <chrono>
 #include <thread>
 
-#include "error.h"
+#include "Error.h"
 #include "Cpu.h"
 
 Cpu::Cpu(Memory& memory) : m_memory(memory), m_displayController(memory, *this), m_soundController(memory)

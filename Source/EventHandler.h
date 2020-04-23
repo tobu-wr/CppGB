@@ -19,7 +19,7 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "types.h"
+#include "Types.h"
 
 class EventHandler
 {
