@@ -41,6 +41,8 @@ public:
 	void updateBgPaletteColor();
 	void updateObjPaletteColor();
 
+	static constexpr u16 CYCLES_PER_FRAME = 17'556;
+
 private:
 	enum
 	{

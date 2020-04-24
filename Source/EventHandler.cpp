@@ -20,6 +20,7 @@ along with CppGB.  If not, see <http://www.gnu.org/licenses/>.
 #include <SDL.h>
 
 #include "EventHandler.h"
+#include "DisplayController.h"
 
 void EventHandler::updateP1(u8& P1)
 {
@@ -52,13 +53,21 @@ bool EventHandler::isQuitRequested()
 	return m_quitRequested;
 }
 
-void EventHandler::pollEvents()
+void EventHandler::doCycle()
 {
-	SDL_Event event;
+	static u16 cycleCounter = 0;
+	++cycleCounter;
 
-	while (SDL_PollEvent(&event))
+	if (cycleCounter == DisplayController::CYCLES_PER_FRAME)
 	{
-		if (event.type == SDL_QUIT)
-			m_quitRequested = true;
+		cycleCounter = 0;
+
+		SDL_Event event;
+
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+				m_quitRequested = true;
+		}
 	}
 }

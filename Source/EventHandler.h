@@ -26,7 +26,7 @@ class EventHandler
 public:
 	static void updateP1(u8& P1);
 	
-	void pollEvents();
+	void doCycle();
 	bool isQuitRequested();
 
 private:
